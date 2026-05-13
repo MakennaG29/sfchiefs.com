@@ -1,0 +1,410 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+header p {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+.game-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-bottom: 2px solid #e0e0e0;
+    justify-content: center;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    font-size: 1em;
+}
+
+.nav-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: scale(1.05);
+}
+
+.nav-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.game-container {
+    display: none;
+    padding: 40px 20px;
+    min-height: 500px;
+}
+
+.game-container.active {
+    display: block;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.game-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.game-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.game-card p {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+.game-content {
+    text-align: center;
+}
+
+.game-content h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+canvas {
+    border: 3px solid #667eea;
+    border-radius: 10px;
+    background: #f9f9f9;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.reset-btn, .back-btn {
+    padding: 12px 30px;
+    margin: 15px 10px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.reset-btn:hover, .back-btn:hover {
+    background: #764ba2;
+    transform: scale(1.05);
+}
+
+.back-btn {
+    display: block;
+    margin-bottom: 20px;
+    background: #999;
+}
+
+.back-btn:hover {
+    background: #666;
+}
+
+.score {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #667eea;
+    margin-top: 20px;
+}
+
+/* Memory Game */
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 30px auto;
+    max-width: 400px;
+}
+
+.memory-card {
+    aspect-ratio: 1;
+    background: #667eea;
+    border: 3px solid #764ba2;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    user-select: none;
+}
+
+.memory-card:hover {
+    transform: scale(1.05);
+}
+
+.memory-card.matched {
+    background: #90EE90;
+    cursor: default;
+}
+
+/* Trivia Game */
+.trivia-content {
+    background: #f5f5f5;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+#triviaQuestion {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: bold;
+}
+
+.trivia-answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.trivia-btn {
+    padding: 15px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s;
+}
+
+.trivia-btn:hover {
+    background: #764ba2;
+    transform: scale(1.05);
+}
+
+.trivia-btn.correct {
+    background: #90EE90;
+}
+
+.trivia-btn.wrong {
+    background: #FF6B6B;
+}
+
+/* Hangman Game */
+.hangman-letters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 30px auto;
+    justify-content: center;
+    max-width: 600px;
+}
+
+.hangman-letter-btn {
+    padding: 8px 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.hangman-letter-btn:hover:not(:disabled) {
+    background: #764ba2;
+    transform: scale(1.1);
+}
+
+.hangman-letter-btn:disabled {
+    background: #ccc;
+    cursor: default;
+    opacity: 0.5;
+}
+
+#hangmanWord {
+    font-size: 2em;
+    letter-spacing: 10px;
+    margin: 30px 0;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+#hangmanDisplay {
+    font-size: 3em;
+    margin: 30px 0;
+    min-height: 80px;
+}
+
+/* Tic Tac Toe */
+.tictactoe-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 30px auto;
+    max-width: 300px;
+}
+
+.tictactoe-cell {
+    aspect-ratio: 1;
+    background: #667eea;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    transition: all 0.3s;
+}
+
+.tictactoe-cell:hover {
+    background: #764ba2;
+    transform: scale(1.05);
+}
+
+.tictactoe-cell:disabled {
+    cursor: default;
+}
+
+#tictactoeStatus {
+    font-size: 1.3em;
+    margin: 20px 0;
+    font-weight: bold;
+    color: #667eea;
+    min-height: 30px;
+}
+
+/* BitLife Game */
+.bitlife-content {
+    background: #f5f5f5;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+.bitlife-stats {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    border: 3px solid #667eea;
+}
+
+.bitlife-stats p {
+    font-size: 1.1em;
+    margin: 10px 0;
+    font-weight: bold;
+    color: #333;
+}
+
+#bitlifeDecisions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.bitlife-choice {
+    padding: 15px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: all 0.3s;
+    text-align: left;
+}
+
+.bitlife-choice:hover {
+    background: #764ba2;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    .games-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    canvas {
+        width: 90% !important;
+        height: auto !important;
+    }
+
+    .game-selector {
+        gap: 5px;
+    }
+
+    .nav-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
