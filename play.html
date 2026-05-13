@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing on sfchiefs.com</title>
+    <style>
+        body {
+            background-color: #1a0826;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+        header {
+            width: 100%;
+            background-color: #29153b;
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 4px solid #ffde00;
+        }
+        .back-btn {
+            color: #ffde00;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .game-container {
+            flex-grow: 1;
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px 0;
+            background-color: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-btn">⬅ Back to sfchiefs.com</a>
+    </header>
+
+    <div class="game-container">
+        <iframe id="arcade-frame" src="" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        // Clean URL data distribution paths matching safe gaming repositories
+        const gameUrls = {
+            "subway-surfers": "gamedistribution.com",
+            "retro-bowl": "gamedistribution.com",
+            "smash-karts": "gamedistribution.com"
+        };
+
+        // Reads the URL tag name to swap out game streams instantly
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameKey = urlParams.get('game');
+
+        if (gameUrls[gameKey]) {
+            document.getElementById('arcade-frame').src = gameUrls[gameKey];
+            document.title = gameKey.replace('-', ' ').toUpperCase() + " | sfchiefs.com";
+        } else {
+            document.querySelector('.game-container').innerHTML = "<h2 style='text-align:center; padding-top:20%;'>Game Not Found.</h2>";
+        }
+    </script>
+
+</body>
+</html>
